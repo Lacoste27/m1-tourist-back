@@ -7,14 +7,14 @@ import { Immutable } from "../../others/types";
 const Paths = {
   Base: "/api",
   Site: {
-    Base: "/sites",
+    Base: "sites",
   },
   Users :{
-    Base: "/users"
+    Base: "users",
+    Signup: "signup",
+    Login: "login"
   }
 };
-
-// **** Export **** //
 
 export type TPaths = Immutable<typeof Paths>;
 export default Paths as TPaths;
