@@ -29,8 +29,7 @@ const signup = async (request: Request, response: Response) => {
 
     Signup(user).then((result) => {
       return response.status(HttpStatusCodes.CREATED).json(result);
-    })
-
+    });
   } catch (error) {
     const result: IResponse = {
       data: {},
@@ -58,14 +57,14 @@ const login = async (request: Request, response: Response) => {
       return response.status(HttpStatusCodes.BAD_REQUEST).json(result);
     }
 
-    const userRequest : IUserRequest = {
-      email : request.body["email"],
-      password: request.body["password"]
-    }
+    const userRequest: IUserRequest = {
+      email: request.body["email"],
+      password: request.body["password"],
+    };
 
-    const login = await Login(userRequest);
-
-
+    Login(userRequest).then((result) => {
+      return response.status(HttpStatusCodes.CREATED).json(result);
+    });
   } catch (error) {
     const result: IResponse = {
       data: {},
@@ -80,8 +79,9 @@ const login = async (request: Request, response: Response) => {
 
 const all = async (request: Request, response: Response) => {
   try {
-    const result = await All();
-    return result;
+    All().then((result: IResponse) => {
+      return response.status(HttpStatusCodes.OK).json(result);
+    });
   } catch (error) {
     const result: IResponse = {
       data: {},

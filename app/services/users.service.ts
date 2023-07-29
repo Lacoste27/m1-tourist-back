@@ -5,9 +5,9 @@ import { User } from "../models/schemas/user";
 import { IResponse } from "../models/types/IResponse";
 import HttpStatusCodes from "../others/httpastatuscode";
 
-const   Signup = async (user: IUser) : Promise<IResponse> => {
+const Signup = async (user: IUser): Promise<IResponse> => {
   try {
-    const password : string = await passwordUtil.getHash(user.password) ;
+    const password: string = await passwordUtil.getHash(user.password);
 
     const toadd = new User();
     toadd.nom = user.nom;
@@ -26,20 +26,28 @@ const   Signup = async (user: IUser) : Promise<IResponse> => {
     };
 
     return result;
-
   } catch (error) {
     throw error;
   }
 };
 
-const Login = async (user: IUserRequest) => {
+const Login = async (user: IUserRequest): Promise<IResponse> => {
   try {
+    const result: IResponse = {
+      data: "token",
+      message: "Utilisateur connecté",
+      isSuccess: true,
+      isError: false,
+      statusCode: HttpStatusCodes.ACCEPTED,
+    };
+
+    return result;
   } catch (error) {
     throw error;
   }
 };
 
-const All = async () => {
+const All = async () : Promise<IResponse> => {
   try {
     const getAll = await all();
 
@@ -52,6 +60,7 @@ const All = async () => {
 
     return result;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };

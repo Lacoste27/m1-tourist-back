@@ -13,10 +13,11 @@ const filter = (request: Request, response: Response, next: NextFunction) => {
       message: "Veuillez d'abord vous identifier",
       isError: false,
       isSuccess: true,
-      statusCode: HttpStatusCodes.UNAUTHORIZED
+      statusCode: HttpStatusCodes.UNAUTHORIZED,
     };
     return response.status(HttpStatusCodes.UNAUTHORIZED).json(message);
   }
+  next(request);
 };
 
 export { filter as UserFilter };
