@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
 import { IResponse } from "../models/types/IResponse";
-import { jwt } from "jsonwebtoken";
 import HttpStatusCodes from "../others/httpastatuscode";
 
 const filter = (request: Request, response: Response, next: NextFunction) => {
@@ -16,8 +15,9 @@ const filter = (request: Request, response: Response, next: NextFunction) => {
       statusCode: HttpStatusCodes.UNAUTHORIZED,
     };
     return response.status(HttpStatusCodes.UNAUTHORIZED).json(message);
+  } else if(token != null) {
+    next();
   }
-  next(request);
 };
 
 export { filter as UserFilter };

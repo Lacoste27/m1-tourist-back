@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 import { UserRoute } from "./routes/users.routes";
 import dotenv from "dotenv";
-import connect from "./models/connection";
+import mongoose from "mongoose";
+
+dotenv.config();
 
 const app = express();
 
-dotenv.config();
-connect();
 
 app.use(cors());
 app.use(express.json());

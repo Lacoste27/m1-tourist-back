@@ -1,31 +1,38 @@
 import mongoose from "mongoose";
 
-const connect = () => {
-  const env: string = process.env.ENV;
-  const url: string = process.env.DB_URL;
+class Connection {
+  connectionstring: string;
 
-  let connectionstring;
-
-  const username: string = process.env.DB_USERNAME;
-  const password: string = process.env.DB_PASSWORD;
-  const host: string = process.env.DB_HOST;
-  const base: string = process.env.DB_BASE;
-
-  switch (env) {
-    case "DEV":
-      connectionstring = url;
-      break;
-
-    case "PROD":
-      connectionstring = `mongodb+srv://${username}:${password}@${host}/${base}`;
-      break;
+  constructor() {
+    this.setConnectionString();
   }
 
-  async () => {
-    await mongoose.connect(connectionstring, {
-      directConnection: true,
-    });
-  };
-};
+  setConnectionString() {
+    const env: string = process.env.ENV;
+    const url: string = process.env.DB_URL;
 
-export default connect;
+    const username: string = process.env.DB_USERNAME;
+    const password: string = process.env.DB_PASSWORD;
+    const host: string = process.env.DB_HOST;
+    const base: string = process.env.DB_BASE;
+
+    if (env === "DEV") {
+      this.connectionstring = url;
+    } else if (env === "PROD") {
+      this.connectionstring = `mongodb+srv://${username}:${password}@${host}/${base}`;
+    }
+
+    console.log(this.connectionstring);
+    
+  }
+
+  OpenConnection = async () => {
+    await mongoose.connect(this.connectionstring);
+  };
+
+  CloseConnection = async () => {
+    await mongoose.connect(this.connectionstring);
+  };
+}
+
+export default Connection;
