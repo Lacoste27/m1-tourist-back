@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt';
 
 // **** Variables **** //
 
-const SALT_ROUNDS = 12;
+const SALT_ROUNDS = 17;
 
 
 // **** Functions **** //
