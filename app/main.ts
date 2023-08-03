@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import { UserRoute } from "./routes/users.routes";
+import { SiteRoute } from "./routes/sites.routes";
 import dotenv from "dotenv";
 import { v2 as cloudinary } from "cloudinary";
 
@@ -17,6 +18,7 @@ cloudinary.config({
 app.use(cors());
 app.use(express.json());
 
+app.use(SiteRoute);
 app.use(UserRoute);
 
 const port = 3000;
