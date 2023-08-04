@@ -1,28 +1,28 @@
-import { IUser } from "../models/types/IUser";
-import { User } from "../models/schemas/user";
 import mongoose from "mongoose";
 import Connection from "../models/connection";
+import { Site } from "../models/schemas/site";
 
-const signup = async (user: any) => {
+const allsite = async () => {
   let connection = new Connection();
   connection.OpenConnection();
 
   try {
-    const add = new User(user);
-    return add.save();
+    const response = Site.find({});
+    return response;
   } catch (error) {
+    console.log(error);
     throw error;
   } finally {
     connection.CloseConnection();
   }
 };
 
-const all = async () => {
+const findOneSite = async (idsite: string) => {
   let connection = new Connection();
   connection.OpenConnection();
 
   try {
-    const response = await User.find({});
+    const response = await Site.findById(idsite);
     return response;
   } catch (error) {
     throw error;
@@ -31,12 +31,19 @@ const all = async () => {
   }
 };
 
-const findbyemail = async (email: string) => {
+const searchSite = async (word: string) => {
   let connection = new Connection();
   connection.OpenConnection();
 
   try {
-    const response = User.findOne({ email: email });
+    const response = await Site
+      .find({
+        $or: [
+          { nom: { $regex: word } },
+          { description: { $regex: word } },
+          { region: { $regex: word } },
+        ],
+      });
     return response;
   } catch (error) {
     throw error;
@@ -45,4 +52,4 @@ const findbyemail = async (email: string) => {
   }
 };
 
-export { signup, all, findbyemail };
+export { allsite, findOneSite, searchSite };

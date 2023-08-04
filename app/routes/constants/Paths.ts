@@ -8,6 +8,7 @@ const Paths = {
   Base: "/api",
   Site: {
     Base: "sites",
+    Search: "search"
   },
   Users :{
     Base: "users",
