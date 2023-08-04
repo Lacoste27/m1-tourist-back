@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { User } from "./schemas/user";
+import { Site } from "./schemas/site";
 
 class Connection {
   connectionstring: string;
@@ -21,8 +23,6 @@ class Connection {
     } else if (env === "PROD") {
       this.connectionstring = `mongodb+srv://${username}:${password}@${host}/${base}`;
     }
-
-    console.log(this.connectionstring);
     
   }
 

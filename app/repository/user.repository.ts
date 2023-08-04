@@ -22,7 +22,7 @@ const all = async () => {
   connection.OpenConnection();
 
   try {
-    const response = await mongoose.model("User").find({});
+    const response = await User.find({});
     return response;
   } catch (error) {
     throw error;
@@ -36,7 +36,7 @@ const findbyemail = async (email: string) => {
   connection.OpenConnection();
 
   try {
-    const response = mongoose.model("User").findOne({ email: email });
+    const response = User.findOne({ email: email });
     return response;
   } catch (error) {
     throw error;

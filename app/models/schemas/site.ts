@@ -31,6 +31,6 @@ const siteSchema = new Schema({
   },
 });
 
-const Site = mongoose.model("Site", siteSchema);
+const Site = mongoose.model("Site", siteSchema, 'site');
 
 export { Site };

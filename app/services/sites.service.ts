@@ -21,8 +21,8 @@ const getAllSites = async (): Promise<IResponse> =>{
         const result: IResponse = {
             data: {},
             message: error,
-            isSuccess: true,
-            isError: false,
+            isSuccess: false,
+            isError: true,
             statusCode: HttpStatusCodes.INTERNAL_SERVER_ERROR,
           };
       
