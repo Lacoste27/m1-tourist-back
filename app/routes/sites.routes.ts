@@ -13,6 +13,6 @@ const searchpath = `${sitesbase}/${Paths.Site.Search}`
 
 router.get(allsitepath, allsite);
 router.get(detailpath, onesite);
-router.get(searchpath, searchSite);
+router.get(searchpath, searchthesite);
 
 export {router as SiteRoute};
