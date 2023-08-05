@@ -9,7 +9,7 @@ const sitesbase = `${Paths.Base}/${Paths.Site.Base}`;
 
 const allsitepath = `${sitesbase}`;
 const detailpath = `${sitesbase}/:id`;
-const searchpath = `${sitesbase}/${Paths.Site.Search}`
+const searchpath = `${Paths.Site.Search}/${sitesbase}`
 
 router.get(allsitepath, allsite);
 router.get(detailpath, onesite);
