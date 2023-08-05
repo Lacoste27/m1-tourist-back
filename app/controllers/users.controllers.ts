@@ -46,6 +46,9 @@ const login = async (request: Request, response: Response) => {
   try {
     const errors = validationResult(request);
 
+    console.log(request.body);
+    
+
     if (!errors.isEmpty()) {
       const result: IResponse = {
         data: {},
