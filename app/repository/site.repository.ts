@@ -39,9 +39,9 @@ const searchSite = async (word: string) => {
     const response = await Site
       .find({
         $or: [
-          { nom: { $regex: word } },
-          { description: { $regex: word } },
-          { region: { $regex: word } },
+          { nom: { $regex: new RegExp(word,'i') } },
+          { description: { $regex:  new RegExp(word,'i') } },
+          { region: { $regex:  new RegExp(word,'i') } },
         ],
       });
     return response;
