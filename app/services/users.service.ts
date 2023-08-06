@@ -11,6 +11,8 @@ const Signup = async (user: IUser): Promise<IResponse> => {
   try {
     const password: string = await passwordUtil.getHash(user.password);
 
+    
+
     const toadd = new User();
     toadd.nom = user.nom;
     toadd.prenom = user.prenom;
@@ -19,8 +21,26 @@ const Signup = async (user: IUser): Promise<IResponse> => {
 
     const _signup = await signup(toadd);
 
+
+    const users: IUserResponse = {
+      nom: toadd.nom,
+      prenom: toadd.prenom,
+      email: toadd.email,
+    };
+
+    const paylod = {
+      nom: _signup.nom,
+      prenom: _signup.prenom,
+      email: _signup.email,
+    };
+
+
+    const token = Jwt.sign(paylod, constants.secretkey, { expiresIn: "5h" });
+
+    users.token = token;
+    
     const result: IResponse = {
-      data: _signup,
+      data: users,
       message: "Utilisateur ajouté",
       isSuccess: true,
       isError: false,

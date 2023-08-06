@@ -8,6 +8,9 @@ import HttpStatusCodes from "../others/httpastatuscode";
 const signup = async (request: Request, response: Response) => {
   try {
     const errors = validationResult(request);
+
+    console.log(request.body);
+
     if (!errors.isEmpty()) {
       const result: IResponse = {
         data: {},
@@ -44,12 +47,12 @@ const signup = async (request: Request, response: Response) => {
 
 const login = async (request: Request, response: Response) => {
   try {
+
     const errors = validationResult(request);
 
-    console.log(request.body);
-    
-
     if (!errors.isEmpty()) {
+
+
       const result: IResponse = {
         data: {},
         message: errors.array(),
