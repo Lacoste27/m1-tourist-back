@@ -52,4 +52,24 @@ const searchSite = async (word: string) => {
   }
 };
 
-export { allsite, findOneSite, searchSite };
+const commentSite = async (idsite: string,username: string, commentaire: string, note: Number) => {
+  let connection = new Connection();
+  connection.OpenConnection();
+
+  const newComment = {
+    note: note,
+    commentaire: commentaire,
+    username: username
+  };
+
+  try {
+    const response = await Site.updateOne({_id: idsite}, {$push : {avis: newComment}});
+    return response;
+  } catch (error) {
+    throw error;
+  } finally {
+    connection.CloseConnection();
+  }
+}
+
+export { allsite, findOneSite, searchSite, commentSite };

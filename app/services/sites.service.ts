@@ -1,4 +1,4 @@
-import { allsite, findOneSite, searchSite } from "../repository/site.repository";
+import { allsite, findOneSite, searchSite, commentSite } from "../repository/site.repository";
 import { ISite } from "../models/types/ISite";
 import { Site } from "../models/schemas/site";
 import { IResponse } from "../models/types/IResponse";
@@ -59,8 +59,8 @@ const getOneSite = async (idsite: string): Promise<IResponse> =>{
         const result: IResponse = {
             data: {},
             message: error,
-            isSuccess: true,
-            isError: false,
+            isSuccess: false,
+            isError: true,
             statusCode: HttpStatusCodes.INTERNAL_SERVER_ERROR,
           };
       
@@ -84,8 +84,8 @@ const doSearchingSite = async (word: string) :Promise<IResponse> =>{
         const result: IResponse = {
             data: {},
             message: error,
-            isSuccess: true,
-            isError: false,
+            isSuccess: false,
+            isError: true,
             statusCode: HttpStatusCodes.INTERNAL_SERVER_ERROR,
           };
       
@@ -93,4 +93,29 @@ const doSearchingSite = async (word: string) :Promise<IResponse> =>{
     }
 }
 
-export {doSearchingSite, getAllSites, getOneSite};
+const makeComment = async (idsite: string,username: string, commentaire: string, note: Number) => {
+    try{
+        const allsites = await commentSite(idsite, username, commentaire, note);
+
+        const result: IResponse = {
+            data: {},
+            message: "Commentaire ajouté",
+            isError: false,
+            isSuccess: true
+        }
+
+        return result;
+    }catch(error){
+        const result: IResponse = {
+            data: {},
+            message: error,
+            isSuccess: false,
+            isError: true,
+            statusCode: HttpStatusCodes.INTERNAL_SERVER_ERROR,
+          };
+      
+          return result;
+    }
+}
+
+export {doSearchingSite, getAllSites, getOneSite, makeComment};
